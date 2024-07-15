@@ -3,8 +3,6 @@
 You can use the code in this repository to test a new method against others, which is based on the freely-available, Python-based, [benchmarking toolbox introduced here.](https://github.com/jmiramont/mcsm-benchs)
 Clone this repository and benchmark your own method locally, i.e. in your computer. This will allow you to run the benchmarks with all the modifications you want (exploring different parameters, type of signals, number of repetitions, etc.).
 
-The [*notebooks*](./notebooks/) folder contains a number of minimal working examples to understand how this benchmark works and how you could use it for your project. In particular, [*demo_benchmark.ipynb*](./notebooks/demo_benchmark.ipynb) gives two minimal working examples to introduce the basic functionality of the `Benchmark` class, and the notebook [*demo_signal_bank.ipynb*](./notebooks/demo_signal_bank.ipynb) showcases the signals produced by the `SignalBank` class.
-
 The instructions below will help you to add a new method and run the benchmark afterwards.
 
 First you should have a local copy of this repository to add and modify files. Open a terminal in a directory of your preference and use
@@ -34,7 +32,7 @@ conda config --set auto_activate_base false
 conda deactivate
 ```
 
-You can now add your new method. You can run the benchmarks for only new added approaches.
+You can now add your new method. You can run the benchmarks with only new added approaches.
 However, if you want to reproduce the current results, [you will need extra dependencies](#reproducing-current-benchmarks).
 
 ## Adding a new method to benchmark
