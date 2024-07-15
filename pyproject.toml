@@ -7,7 +7,7 @@ packages = [{include = "src"}]
 
 # Add your own dependencies here using "poetry add [dependency_name]"
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.11"
 PyYAML = "^6.0"
 mcsm-benchs = {git = "https://github.com/jmiramont/mcsm-benchs.git", branch = "dev"}
 
