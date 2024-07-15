@@ -5,8 +5,10 @@ authors = ["name <name@mymail.com>"]
 readme = "README.md"
 packages = [{include = "src"}]
 
+# Add your own dependencies here using "poetry add [dependency_name]"
 [tool.poetry.dependencies]
 python = "^3.10"
+PyYAML = "^6.0"
 mcsm-benchs = {git = "https://github.com/jmiramont/mcsm-benchs.git", branch = "dev"}
 
 
