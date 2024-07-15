@@ -95,12 +95,13 @@ if __name__ == "__main__":
     my_results = benchmark.run_test() # Run the test. my_results is a nested dictionary with the results for each of the variables of the simulation.
     end = time.time()
     print("The time of execution:", end-start)
-    df = benchmark.get_results_as_df() # This formats the results on a DataFrame
-    print(df)
     
     # Save the benchmark to a file. Notice that only the methods_ids are saved.
     filename = os.path.join('results',config['task']+'_benchmark_results')
     benchmark.save_to_file(filename = filename)
+    
+    df = benchmark.get_results_as_df() # This formats the results on a DataFrame
+    print(df)
 
     # results_interpreter = ResultsInterpreter(benchmark)
     # results_interpreter.save_report(path='results')
