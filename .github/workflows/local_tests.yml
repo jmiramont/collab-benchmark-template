@@ -1,0 +1,56 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Last Benchmark
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout project
+        uses: actions/checkout@v2
+        with:         
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          persist-credentials: true
+
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+      - name: Install main (non-optional) and dev dependencies
+        # see [tool.poetry.dependencies] and [tool.poetry.dev-dependencies]
+        # in pyproject.toml
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --extras "matlab_tools"
+
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install package
+        run: poetry install --extras "matlab_tools"
+        
+      - name: Install rtools
+        run: poetry run pip install rpy2 spatstat-interface
+
+      #----------------------------------------------
+      #    run test suite
+      #----------------------------------------------
+      - name: Test with pytest
+        run: poetry run pytest
+
+      - name: Run the Benchmark
+        run: |
+          poetry run python run_this_benchmark_denoising.py
+      #   poetry run python run_this_benchmark_detection.py
+
+      - name: Commit and push files
+        run: |
+          git config --local user.email "MeBot@github.com"
+          git config --local user.name "MeBot"
+          git add results --all
+          git commit -m "Add changes" -a
+          git push origin main
+          
