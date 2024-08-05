@@ -1,31 +1,50 @@
-# This workflow will install dependencies and run the benchmark(s)
-name: Run benchmarks
+# This workflow will publish the benchmark results.
+name: Run benchmarks...
 
-on: workflow_dispatch
+# on: workflow_dispatch
+
+on:
+  push:
+    branches: [ main ]
 
 jobs:
+  # This workflow contains a single job called "test"
   test:
-    runs-on: self-hosted
+    permissions:
+      contents: write
+  # The type of runner that the job will run on
+    strategy:
+      matrix:
+#         os: ["ubuntu-latest", "macos-latest"]
+        os: ["ubuntu-latest"]
+        # python-version: ["3.7", "3.8", "3.9"]
+        python-version: ["3.10"]
+    runs-on: ${{ matrix.os }}
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout project
         uses: actions/checkout@v2
-        with:         
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          persist-credentials: true
 
-      # - name: Install main (non-optional) and dev dependencies
-      #   # see [tool.poetry.dependencies] and [tool.poetry.dev-dependencies]
-      #   # in pyproject.toml
-      #   if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      #   run: poetry install --extras "matlab_tools"
-
-      - name: Install package
-        run: poetry install #--extras "matlab_tools"
-        
-      # - name: Install rtools
-      #   run: poetry run pip install rpy2 spatstat-interface
+      # Install python
+      - name: Install Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      
+      # Install Poetry and the dependencies
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
 
       # - name: Test with pytest
         # run: poetry run pytest
