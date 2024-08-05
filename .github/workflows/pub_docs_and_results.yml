@@ -9,10 +9,9 @@ on:
 
 jobs:
   # This workflow contains a single job called "test"
-  publish_results:
+  test:
     permissions:
       contents: write
-
   # The type of runner that the job will run on
     strategy:
       matrix:
@@ -39,9 +38,41 @@ jobs:
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
+          
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+      # - name: Install dependencies
+      #   if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      #   run: poetry install --no-interaction --no-root
 
       - name: Install package
         run: poetry install --with docs
+
+      - name: Print repository information using github context
+        run: |
+          echo "Using github context:"
+          echo "Repository owner: ${{ github.repository_owner }}"
+          echo "Repository name: ${{ github.event.repository.name }}"
+
+      - name: Print repository information using environment variables
+        run: |
+          echo "Using environment variables:"
+          REPO=${GITHUB_REPOSITORY}
+          OWNER=$(echo $REPO | cut -d'/' -f1)
+          NAME=$(echo $REPO | cut -d'/' -f2)
+          echo "Repository owner: $OWNER"
+          echo "Repository name: $NAME"
+
+      - name: Execute Test Script
+        run: |
+         OWNER=$(echo ${GITHUB_REPOSITORY} | cut -d'/' -f1) NAME=$(echo ${GITHUB_REPOSITORY} | cut -d'/' -f2) .venv/bin/python3 publish_results.py
 
       - name: Install pandoc
         run: sudo apt install pandoc

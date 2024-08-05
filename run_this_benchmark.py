@@ -102,22 +102,7 @@ if __name__ == "__main__":
     
     df = benchmark.get_results_as_df() # This formats the results on a DataFrame
     print(df)
+  
 
-    interpreter = ResultsInterpreter(benchmark)
-    
-    # Report shown in the repo 
-    interpreter.save_report(path=os.path.join('results'), 
-                            link='https://jmiramont.github.io/benchmarks-detection-denoising/results/detection')
-
-    # Interactive figures shown in the repo
-    interpreter.get_html_figures(df=interpreter.get_benchmark_as_data_frame(),
-                                #   varfun=cp_ci, 
-                                  path=os.path.join('results'), 
-                                  bars=True, 
-                                  ylabel='Perf. Fun.',
-                                  )
-
-    # .csv files for sharing results
-    interpreter.get_csv_files(path=os.path.join('results'),)
 
   
