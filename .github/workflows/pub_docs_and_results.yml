@@ -55,20 +55,20 @@ jobs:
       - name: Install package
         run: poetry install --with docs
 
-      - name: Print repository information using github context
-        run: |
-          echo "Using github context:"
-          echo "Repository owner: ${{ github.repository_owner }}"
-          echo "Repository name: ${{ github.event.repository.name }}"
+      # - name: Print repository information using github context
+      #   run: |
+      #     echo "Using github context:"
+      #     echo "Repository owner: ${{ github.repository_owner }}"
+      #     echo "Repository name: ${{ github.event.repository.name }}"
 
-      - name: Print repository information using environment variables
-        run: |
-          echo "Using environment variables:"
-          REPO=${GITHUB_REPOSITORY}
-          OWNER=$(echo $REPO | cut -d'/' -f1)
-          NAME=$(echo $REPO | cut -d'/' -f2)
-          echo "Repository owner: $OWNER"
-          echo "Repository name: $NAME"
+      # - name: Print repository information using environment variables
+      #   run: |
+      #     echo "Using environment variables:"
+      #     REPO=${GITHUB_REPOSITORY}
+      #     OWNER=$(echo $REPO | cut -d'/' -f1)
+      #     NAME=$(echo $REPO | cut -d'/' -f2)
+      #     echo "Repository owner: $OWNER"
+      #     echo "Repository name: $NAME"
 
       - name: Execute Test Script
         run: |
