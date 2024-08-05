@@ -1,9 +1,13 @@
-# This workflow will publish the benchmark results.
 name: Publish docs and results
 
-# on: workflow_dispatch
-
 on:
+  workflow_run:
+    workflows: [Run benchmarks...]
+    types:
+      - completed
+      
+  workflow_dispatch:
+
   push:
     branches: [ main ]
 
