@@ -15,17 +15,17 @@ jobs:
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
           persist-credentials: true
 
-      - name: Install main (non-optional) and dev dependencies
-        # see [tool.poetry.dependencies] and [tool.poetry.dev-dependencies]
-        # in pyproject.toml
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --extras "matlab_tools"
+      # - name: Install main (non-optional) and dev dependencies
+      #   # see [tool.poetry.dependencies] and [tool.poetry.dev-dependencies]
+      #   # in pyproject.toml
+      #   if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      #   run: poetry install --extras "matlab_tools"
 
       - name: Install package
-        run: poetry install --extras "matlab_tools"
+        run: poetry install #--extras "matlab_tools"
         
-      - name: Install rtools
-        run: poetry run pip install rpy2 spatstat-interface
+      # - name: Install rtools
+      #   run: poetry run pip install rpy2 spatstat-interface
 
       # - name: Test with pytest
         # run: poetry run pytest
