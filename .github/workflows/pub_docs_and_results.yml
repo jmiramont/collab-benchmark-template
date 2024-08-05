@@ -1,19 +1,19 @@
 name: Publish docs and results
 
 on:
-  workflow_run:
-    workflows: [Run benchmarks...]
+  workflow_run: # Start if benchmarks are run in GitHub Actions,
+    workflows: [Run benchmarks]
     types:
       - completed
       
-  workflow_dispatch:
+  workflow_dispatch: # Or if the user decides to run it,
 
-  push:
+  push: # Or after a push in the main branch.
     branches: [ main ]
 
 jobs:
-  # This workflow contains a single job called "test"
-  test:
+  # This workflow contains a single job called "publishing"
+  publishing:
     permissions:
       contents: write
   # The type of runner that the job will run on
@@ -49,64 +49,19 @@ jobs:
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      #----------------------------------------------
-      # install dependencies if cache does not exist
-      #----------------------------------------------
-      # - name: Install dependencies
-      #   if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      #   run: poetry install --no-interaction --no-root
 
-      - name: Install package
+      - name: Install package # With docs dependencies.
         run: poetry install --with docs
 
-      # - name: Print repository information using github context
-      #   run: |
-      #     echo "Using github context:"
-      #     echo "Repository owner: ${{ github.repository_owner }}"
-      #     echo "Repository name: ${{ github.event.repository.name }}"
-
-      # - name: Print repository information using environment variables
-      #   run: |
-      #     echo "Using environment variables:"
-      #     REPO=${GITHUB_REPOSITORY}
-      #     OWNER=$(echo $REPO | cut -d'/' -f1)
-      #     NAME=$(echo $REPO | cut -d'/' -f2)
-      #     echo "Repository owner: $OWNER"
-      #     echo "Repository name: $NAME"
-
-      - name: Execute Test Script
+      - name: Execute Test Script # Here we generate the report, plots and .csv files.
         run: |
          OWNER=$(echo ${GITHUB_REPOSITORY} | cut -d'/' -f1) NAME=$(echo ${GITHUB_REPOSITORY} | cut -d'/' -f2) .venv/bin/python3 publish_results.py
 
       - name: Install pandoc
         run: sudo apt install pandoc
 
-      # - name: Publish results
-      #   env:
-      #     SRC_FOLDER_PATH: 'results'
-      #     TARGET_BRANCH: 'gh-pages'
-      #   run: |
-      #     files=$(find $SRC_FOLDER_PATH -type f) # get the file list
-      #     git config --global user.name 'GitHub Action'
-      #     git config --global user.email 'action@github.com'
-      #     git fetch                         # fetch branches
-      #     git checkout $TARGET_BRANCH       # checkout to your branch
-      #     git checkout ${GITHUB_REF##*/} -- $files # copy files from the source branch
-      #     git add -A
-      #     git diff-index --quiet HEAD ||  git commit -am "deploy files"  # commit to the repository (ignore if no modification)
-      #     git push origin $TARGET_BRANCH # push to remote branch
-
-      #----------------------------------------------
-      #    deploy documentation
-      #----------------------------------------------  
-      # - name: Create .nojekyll file.
-      #   run: | 
-      #     > .nojekyll 
-      
-      - name: Move reports to docs folder for html
+      - name: Move all .md reports to docs # To make html versions
         run: | 
-          # cp results/results_denoising.md docs/source
-          # cp results/results_detection.md docs/source
           cp results/*.md docs/source
           
       - name: Build docs
@@ -115,7 +70,7 @@ jobs:
           poetry run make clean
           poetry run make html 
       
-      - name: Move reports to docs folder for html
+      - name: Move rest of files from results # (plots and .csv files)
         run: |
           # cd ..
           cp -r results docs/build/html
