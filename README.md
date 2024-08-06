@@ -1,10 +1,13 @@
+# A template for a collaborative benchmark repository
+
+You can use this template to create a public, collaborative benchmarks of multi-component signal processing methods based on the benchmarking toolbox [```mcsm-benchs```](https://github.com/jmiramont/mcsm-benchs).
+
 ## Quickstart
 
-You can use this template to create a public, collaborative benchmark based on the freely-available, Python-based, [benchmarking toolbox ```mcsm-benchs``` introduced here.](https://github.com/jmiramont/mcsm-benchs).
-
-Steps:
-
-1. Use this template to create a new repository.
+1. Use this template to [create a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+>[!NOTE]
+> Make sure you include all the branches of the template by checking the *"Include all branches"* option.
+2. Create a local version of your new collaborative benchmark by [cloning the new repository](#benchmarking-a-new-method).
 2. [Create](#installation-using-poetry) a new python virtual environment and install the main dependencies using [```poetry```](https://python-poetry.org/docs/):
 
     ```bash
@@ -17,7 +20,8 @@ Steps:
 6. Push your changes to your repository and wait for the results to get published.
 7. Share interactive results to others
 
-:bulb: Collaborators can add new methods to your benchmark [via a pull-request](#adding-your-own-method-to-the-online-benchmark).
+>[!TIP]
+>:bulb: Collaborators can add new methods to your benchmark [via a pull-request](#contributing-new-methods-to-an-online-benchmark).
 
 ## Benchmarking a new method
 
@@ -25,8 +29,10 @@ The instructions below will help you to add a new method and run the benchmark a
 First you should have a local copy of this repository to add and modify files. Open a terminal in a directory of your preference and use
 
 ```bash
-git clone https://github.com/jmiramont/benchmarks-detection-denoising
+git clone https://github.com/USERNAME/REPOSITORY
 ```
+
+Make sure to replace `USERNAME` and `REPOSITORY` with your GitHub username and repository name, respectively.
 
 ### Installation using ```poetry```
 
@@ -37,14 +43,12 @@ Then, make ```poetry``` create a virtual environment and install the main depend
 poetry install --only main
 ```
 
-*Remark for conda users:*
-
-*If you have [`Anaconda`](https://www.anaconda.com/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) installed please disable the auto-activation of the base environment and your conda environment using:*
-
-```bash
-conda config --set auto_activate_base false
-conda deactivate
-```
+>[!NOTE]
+>If you have [`Anaconda`](https://www.anaconda.com/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) installed please disable the auto-activation of the base environment and your conda environment using:
+>```bash
+>conda config --set auto_activate_base false
+>conda deactivate
+>```
 
 Benchmarking Matlab-implemented methods is possible thanks to the incorporated [Matlab's Python engine](https://fr.mathworks.com/help/matlab/matlab-engine-for-python.html), that allows communication between python and a Matlab's session. This module's version must be compatible with your local Matlab installation, please  [modify the dependencies for this package accordingly](#adding-dependencies).
 Additionally, Matlab's Python engine is only compatible with certain Python versions, depending on the local Matlab installation you are running. [Check that your versions of matlab and Python are compatible](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/sysreq/files/python-compatibility.pdf).
@@ -108,7 +112,7 @@ def method(self, signal, params)
 class NewMethod(MethodTemplate):
     def __init__(self):
         self.id = 'a_new_method'
-        self.task = 'denoising'  # Should be either 'denoising' or 'detection'
+        self.task = 'denoising'  # Should be either 'denoising', 'detection' or 'misc'
 
     def method(self, signals, params = None): # Implement this method.
         ...
@@ -124,7 +128,10 @@ Lastly, you have to implement the class function ```method(self, signals, *args,
 
 If you want to test your method using different sets of parameters, you can also implement the function `get_parameters()` to return a list with the desired input parameters (you can find an example of this [here](./new_method_example/method_new_with_parameters.py)).
 
-Finally, **you have to move the file** with all the modifications to the folder [/src/methods](./src/methods). Changing the name of the file is possible, but keep in mind that **the file's name must start with "*method_*" to be recognizable**.
+Finally, **you have to move the file** with all the modifications to the folder [/src/methods](./src/methods). 
+
+>[!WARNING]
+>Changing the name of the file is possible, but keep in mind that **the file's name must start with "*method_*" to be recognizable**.
 
 ### Matlab and Octave-based methods
 
@@ -136,9 +143,13 @@ The Matlab/Octave function implementing your method must have a particular signa
 
 Your method can have all the (positional) input arguments you need. The output of the function must be a Matlab matrix of [predefined dimensions according to the task.](#size-of-outputs-according-to-the-task)
 
-We now can see how to benchmark a method implemented in Matlab. A template file is given [here](./new_method_example/method_new_basic_template_matlab.py) for interested users.
+>[!NOTE]
+> If your method returns more than one parameter, only the first one is taken as the output for the benchmark.
 
-In the first section of the file, the class ```MatlabInterface``` is imported, which will simply act as an interface between Python and a Matlab session where your method will be run:
+We now can see how to benchmark a method implemented in Matlab/Octave. 
+Similarly to the case of Python-based methods, a template file is given [here](./new_method_example/method_new_basic_template_matlab.py) for interested users.
+
+In the first section of this file, the class ```MatlabInterface``` is imported, which will simply act as an interface between Python and a Matlab session where your method will be run:
 
 ```python
 
@@ -187,11 +198,10 @@ class NewMethod(MethodTemplate):
 
 ```
 
-The constructor function ```__init__(self)``` must initialize the attributes ```self.id``` and ```self.task```. The first is a string to identify your method in the benchmark. The second is the name of the task your method is devoted to.
+<!-- The constructor function ```__init__(self)``` must initialize the attributes ```self.id``` and ```self.task```. The first is a string to identify your method in the benchmark. The second is the name of the task your method is devoted to. -->
 
-*Remark: The ```MatlabInterface``` class will cast the input parameters in the appropriate Matlab types.*
-
-*Remark 2: A Matlab method must comply with the [output parameters shapes expected by the toolbox](#size-of-outputs-according-to-the-task). Matlab vectors of double type numbers will be cast into numpy arrays of floats, and Matlab's boolean types will be cast into python booleans. If your method returns more than one parameter, only the first one returned is taken*.
+>[!NOTE]
+>The ```MatlabInterface``` class provided by [```mcsm-benchs```](https://github.com/jmiramont/mcsm-benchs) will cast the input parameters in the appropriate Matlab types.
 
 ## Running the benchmark with new methods
 
@@ -206,8 +216,8 @@ This will run the benchmark using new added methods, avoiding previously explore
 
 ## Changing the benchmark configuration
 
-The benchmark parameters can be modified using the  files [```config_denoising.yaml```](./config_denoising.yaml) and [```config_detection.yaml```](./config_detection.yaml) located in the repository.
-Each line of this file define an input parameter of the benchmark:
+The benchmark parameters can be modified using the config file [```config.yaml```](./config.yaml) located in the repository.
+This file defines the input parameters of the benchmark:
 
 ```yaml
 N: 1024 # Number of time samples
@@ -237,7 +247,7 @@ pandas = "^1.3.5"
 
 ```
 
-A more convenient and interactive way to do this interactively is by using ```poetry```, for example:
+A more convenient and interactive way to do this interactively is by using ```poetry```, for instance:
 
 ```bash
 poetry add numpy
@@ -245,42 +255,31 @@ poetry add numpy
 
 and following the instructions prompted in the console.
 
-Afer this, run
+## Contributing new methods to an online benchmark
 
-```bash
-poetry update
-```
-
-to update the .lock file in the folder.
-
-## Adding your own method to the online benchmark
-
-For this, [fork this repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo), for example by using the "Fork" button above:
+To add new methods to an online benchmark, you first need to [fork the collaborative benchmark repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo). 
+One easy way you can do this is by using the "Fork" button above:
 
 ![Repository header](docs/readme_figures/header_repo.png)
 
 This will create a copy of the repository in your own GitHub account, the URL of which should look like
 
 ```bash
-https://github.com/YOUR-USERNAME/benchmarks-detection-denoising
+https://github.com/YOUR-USERNAME/FORKED-REPO-NAME
 ```
 
 Now, let's create a local copy, i.e. in your computer, of the repository you have just forked. Open a terminal in a directory of your preference and use
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/benchmarks-detection-denoising
+git clone https://github.com/YOUR-USERNAME/FORKED-REPO-NAME
 ```
 
-When a repository is forked, a copy of all the branches existing in the original one are also created. It would be better if you create a new branch to work in your own changes, mainly adding your new method to be tested. For this, create a new branch using:
+When a repository is forked, a copy of all the branches existing in the original one are also created.
 
-```bash
-git branch new_method
-git checkout new_method
-```
+Now, follow the instructions to [add your method to a benchmark](#adding-a-new-method-to-benchmark), in this case in a local copy of this repository, in order to be able to add and modify files.
 
-Now you can follow the instructions to [add your method to the benchmark](#adding-a-new-method-to-benchmark), in this case in a local copy of this repository, in order to be able to add and modify files.
-
-After this, you can get your approach added to the benchmark via a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests). First, you need to update the remote version of your fork, now that you have added your new method and tested that it is working with ```pytest```. To do this, commit the changes and then push them to your remote repository:
+After this, you can get your method added to the benchmark via a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests).
+For this, you need first to update the remote version of your fork by committing the changes and then pushing them to your remote repository:
 
 ```bash
 git commit --all -m "Uploading a new method"
@@ -349,8 +348,9 @@ Once the tests are passed, you can now either create a pull request to run the b
 
 The shape and type of the output depends on the task.
 
-- For Signal Denoising: The output must be a vector array with the same length as the signal.
-- For Signal Detection: The output of the method must be a boolean variable indicating if a signal has been detected (true) or not (false).
+- For `task = denoising`: The output must be a vector array with the same length as the signal.
+- For `task = detection`: The output of the method must be a boolean variable indicating if a signal has been detected (true) or not (false).
+- For `task = misc`: The output of the method has not size limitation, but a performance function capable of taking the output must be passed as an input parameter to the benchmark.
 
 ## Reproducing current benchmarks
 
