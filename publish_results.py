@@ -61,3 +61,5 @@ if __name__ == "__main__":
 
         # .csv files for sharing results
         interpreter.get_csv_files(path=os.path.join('results',sub_folder),)
+
+        #TODO Build table to summarize the results.

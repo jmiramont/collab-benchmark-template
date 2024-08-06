@@ -1,17 +1,34 @@
+## Quickstart
+
+You can use this template to create a public, collaborative benchmark based on the freely-available, Python-based, [benchmarking toolbox ```mcsm-benchs``` introduced here.](https://github.com/jmiramont/mcsm-benchs).
+
+Steps:
+
+1. Use this template to create a new repository.
+2. [Create](#installation-using-poetry) a new python virtual environment and install the main dependencies using [```poetry```](https://python-poetry.org/docs/):
+
+    ```bash
+    poetry install --only main
+    ```
+
+3. [Add your methods](#adding-a-new-method-to-benchmark) by moving files that represent them in ```/src/methods``` folder and [adding new dependencies](#adding-dependencies).
+4. [Configure](#changing-the-benchmark-configuration) your benchmark by changing [```config.yaml```](config.yaml).
+5. [Run](#running-the-benchmark-with-new-methods) the script ```run_this_benchmark.py```.
+6. Push your changes to your repository and wait for the results to get published.
+7. Share interactive results to others
+
+:bulb: Collaborators can add new methods to your benchmark [via a pull-request](#adding-your-own-method-to-the-online-benchmark).
+
 ## Benchmarking a new method
 
-You can use the code in this repository to test a new method against others, which is based on the freely-available, Python-based, [benchmarking toolbox introduced here.](https://github.com/jmiramont/mcsm-benchs)
-Clone this repository and benchmark your own method locally, i.e. in your computer. This will allow you to run the benchmarks with all the modifications you want (exploring different parameters, type of signals, number of repetitions, etc.).
-
 The instructions below will help you to add a new method and run the benchmark afterwards.
-
 First you should have a local copy of this repository to add and modify files. Open a terminal in a directory of your preference and use
 
 ```bash
 git clone https://github.com/jmiramont/benchmarks-detection-denoising
 ```
 
-## Installation using ```poetry```
+### Installation using ```poetry```
 
 We use [```poetry```](https://python-poetry.org/docs/), a tool for dependency management and packaging in python to install the benchmarking framework. You can install ```poetry``` following the steps described [here](https://python-poetry.org/docs/#installation).
 Then, make ```poetry``` create a virtual environment and install the main dependencies of the benchmarks using:
@@ -19,9 +36,6 @@ Then, make ```poetry``` create a virtual environment and install the main depend
 ```bash
 poetry install --only main
 ```
-
-Benchmarking Matlab-implemented methods is possible thanks to the incorporated [Matlab's Python engine](https://fr.mathworks.com/help/matlab/matlab-engine-for-python.html), that allows communication between python and a Matlab's session. This module's version must be compatible with your local Matlab installation, please  [modify the dependencies for this package accordingly](#adding-dependencies).
-Additionally, Matlab's Python engine is only compatible with certain Python versions, depending on the local Matlab installation you are running. [Check that your versions of matlab and Python are compatible](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/sysreq/files/python-compatibility.pdf).
 
 *Remark for conda users:*
 
@@ -32,12 +46,15 @@ conda config --set auto_activate_base false
 conda deactivate
 ```
 
+Benchmarking Matlab-implemented methods is possible thanks to the incorporated [Matlab's Python engine](https://fr.mathworks.com/help/matlab/matlab-engine-for-python.html), that allows communication between python and a Matlab's session. This module's version must be compatible with your local Matlab installation, please  [modify the dependencies for this package accordingly](#adding-dependencies).
+Additionally, Matlab's Python engine is only compatible with certain Python versions, depending on the local Matlab installation you are running. [Check that your versions of matlab and Python are compatible](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/sysreq/files/python-compatibility.pdf).
+
 You can now add your new method. You can run the benchmarks with only new added approaches.
 However, if you want to reproduce the current results, [you will need extra dependencies](#reproducing-current-benchmarks).
 
 ## Adding a new method to benchmark
 
-Whether your method is implemented in Python or Matlab, you must create a new ```.py``` file the name of which must start with *method_* and have certain content to be automatically discovered by the toolbox. The purpose of this file is to encapsulate your method in a new class. This is much easier than it sounds :). To make it simpler, [a file called *method_new_basic_template.py* is made available](./new_method_example/method_new_basic_template.py) (for Python users) which you can use as a template. You just have to fill in the parts that implement your method. Matlab users can also find a template [here](./new_method_example/method_new_basic_template_matlab.py).
+Whether your method is implemented in Python or Matlab, you must create a new ```.py``` file the name of which must start with *method_* and have certain content to be automatically discovered by the toolbox. The purpose of this file is to encapsulate your method in a new class. This is much easier than it sounds :). To make it simpler, [a file called *method_new_basic_template.py* is made available](./new_method_example/method_new_basic_template.py) (for Python users) which you can use as a template. You just have to fill in the parts that implement your method. Matlab users can also find a template [here](./new_method_example/method_new_basic_template_matlab.py), as well as Octave users [here](./new_method_example/method_new_basic_template_octave.py)
 A new method can then be tested against others by adding this file into the folder [src/methods](./src/methods). We shall see how to do this using a template file in the following sections.
 
 ### Python-based methods
@@ -109,15 +126,15 @@ If you want to test your method using different sets of parameters, you can also
 
 Finally, **you have to move the file** with all the modifications to the folder [/src/methods](./src/methods). Changing the name of the file is possible, but keep in mind that **the file's name must start with "*method_*" to be recognizable**.
 
-### Matlab-based method
+### Matlab and Octave-based methods
 
-The Matlab function implementing your method must have a particular signature. For example, for a method with two input parameters should be:
+The Matlab/Octave function implementing your method must have a particular signature. For example, for a method with two input parameters should be:
 
 ```matlab
     function [X]  = a_matlab_method(signal, param_1, param_2)
 ```
 
-Your method can have all the (positional) input arguments you need. The ouput of the function must be a Matlab matrix of [predefined dimensions according to the task.](#size-of-outputs-according-to-the-task)
+Your method can have all the (positional) input arguments you need. The output of the function must be a Matlab matrix of [predefined dimensions according to the task.](#size-of-outputs-according-to-the-task)
 
 We now can see how to benchmark a method implemented in Matlab. A template file is given [here](./new_method_example/method_new_basic_template_matlab.py) for interested users.
 
@@ -178,7 +195,7 @@ The constructor function ```__init__(self)``` must initialize the attributes ```
 
 ## Running the benchmark with new methods
 
-Once the new methods are added, you can run a benchmark by executing the files ```run_this_benchmark_*.py``` located in the repository.
+Once the new methods are added, you can run a benchmark by executing the files ```run_this_benchmark.py``` located in the repository.
 You can do this using the local environment created with ```poetry``` by running:
 
 ```bash
@@ -337,24 +354,5 @@ The shape and type of the output depends on the task.
 
 ## Reproducing current benchmarks
 
-### Re-run Detection Benchmark
+### Re-run benchmarks
 
-The detection tests used in this benchmark are based on R's ```spatstat``` and ```GET``` packages and Python's [```spatstat-interface```](https://pypi.org/project/spatstat-interface/). If you want to rerun the tests, you should have R installed in your system and run:
-
-```bash
-poetry install --with rtools
-```
-
-### Re-run Denoising Benchmarks
-
-Similarly, some denoising methods used in this benchmark are implemented in Matlab. You must have a recent Matlab installation in order to run the benchmark from scratch including these methods and run:
-
-```bash
-poetry install --with matlab_tools
-```
-
-If you want to run all benchmarks, use:
-
-```bash
-poetry install --with "rtools, matlab_tools"
-```
