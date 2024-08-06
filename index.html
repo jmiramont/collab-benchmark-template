@@ -46,7 +46,7 @@
   
   
   
-    <title>Quickstart &#8212; A collaborative benchmark  documentation</title>
+    <title>A template for a collaborative benchmark repository &#8212; A collaborative benchmark  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=83e35b93" />
     <link rel="stylesheet" type="text/css" href="_static/material.css?v=79c92029" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -94,7 +94,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           <span class="md-header-nav__topic">Benchmark results</span>
-          <span class="md-header-nav__topic"> Quickstart </span>
+          <span class="md-header-nav__topic"> A template for a collaborative benchmark repository </span>
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
@@ -215,7 +215,9 @@
 <nav class="md-nav md-nav--secondary">
     <label class="md-nav__title" for="__toc">"Contents"</label>
   <ul class="md-nav__list" data-md-scrollfix="">
-        <li class="md-nav__item"><a href="#index--page-root" class="md-nav__link">Quickstart</a>
+        <li class="md-nav__item"><a href="#index--page-root" class="md-nav__link">A template for a collaborative benchmark repository</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#quickstart" class="md-nav__link">Quickstart</a>
         </li>
         <li class="md-nav__item"><a href="#benchmarking-a-new-method" class="md-nav__link">Benchmarking a new method</a><nav class="md-nav">
               <ul class="md-nav__list">
@@ -237,7 +239,7 @@
         </li>
         <li class="md-nav__item"><a href="#adding-dependencies" class="md-nav__link">Adding dependencies</a>
         </li>
-        <li class="md-nav__item"><a href="#adding-your-own-method-to-the-online-benchmark" class="md-nav__link">Adding your own method to the online benchmark</a>
+        <li class="md-nav__item"><a href="#contributing-new-methods-to-an-online-benchmark" class="md-nav__link">Contributing new methods to an online benchmark</a>
         </li>
         <li class="md-nav__item"><a href="#modify-matlabengine-module-version" class="md-nav__link">Modify <code class="docutils literal notranslate"><span class="pre">matlabengine</span></code> module version</a>
         </li>
@@ -246,6 +248,8 @@
         <li class="md-nav__item"><a href="#reproducing-current-benchmarks" class="md-nav__link">Reproducing current benchmarks</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#re-run-benchmarks" class="md-nav__link">Re-run benchmarks</a>
+        </li></ul>
+            </nav>
         </li></ul>
             </nav>
         </li>
@@ -265,12 +269,20 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  <section id="quickstart">
-<h1 id="index--page-root">Quickstart<a class="headerlink" href="#index--page-root" title="Link to this heading">¶</a></h1>
-<p>You can use this template to create a public, collaborative benchmark based on the freely-available, Python-based, <a class="reference external" href="https://github.com/jmiramont/mcsm-benchs">benchmarking toolbox <code class="docutils literal notranslate"><span class="pre">mcsm-benchs</span></code> introduced here.</a>.</p>
-<p>Steps:</p>
-<ol class="arabic">
-<li><p>Use this template to create a new repository.</p></li>
+  <section id="a-template-for-a-collaborative-benchmark-repository">
+<h1 id="index--page-root">A template for a collaborative benchmark repository<a class="headerlink" href="#index--page-root" title="Link to this heading">¶</a></h1>
+<p>You can use this template to create a public, collaborative benchmarks of multi-component signal processing methods based on the benchmarking toolbox <a class="reference external" href="https://github.com/jmiramont/mcsm-benchs"><code class="docutils literal notranslate"><span class="pre">mcsm-benchs</span></code></a>.</p>
+<section id="quickstart">
+<h2 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Use this template to <a class="reference external" href="https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template">create a new repository</a>.</p></li>
+</ol>
+<blockquote>
+<div><p>[!NOTE]
+Make sure you include all the branches of the template by checking the <em>“Include all branches”</em> option.</p>
+</div></blockquote>
+<ol class="arabic" start="2">
+<li><p>Create a local version of your new collaborative benchmark by <a class="reference internal" href="#benchmarking-a-new-method"><span class="std std-ref">cloning the new repository</span></a>.</p></li>
 <li><p><a class="reference internal" href="#installation-using-poetry"><span class="std std-ref">Create</span></a> a new python virtual environment and install the main dependencies using <a class="reference external" href="https://python-poetry.org/docs/"><code class="docutils literal notranslate"><span class="pre">poetry</span></code></a>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>install<span class="w"> </span>--only<span class="w"> </span>main
 </pre></div>
@@ -282,28 +294,34 @@
 <li><p>Push your changes to your repository and wait for the results to get published.</p></li>
 <li><p>Share interactive results to others</p></li>
 </ol>
-<p>:bulb: Collaborators can add new methods to your benchmark <a class="reference internal" href="#adding-your-own-method-to-the-online-benchmark"><span class="std std-ref">via a pull-request</span></a>.</p>
+<blockquote>
+<div><p>[!TIP]
+:bulb: Collaborators can add new methods to your benchmark <a class="reference internal" href="#contributing-new-methods-to-an-online-benchmark"><span class="std std-ref">via a pull-request</span></a>.</p>
+</div></blockquote>
 </section>
 <section id="benchmarking-a-new-method">
-<h1 id="benchmarking-a-new-method">Benchmarking a new method<a class="headerlink" href="#benchmarking-a-new-method" title="Link to this heading">¶</a></h1>
+<h2 id="benchmarking-a-new-method">Benchmarking a new method<a class="headerlink" href="#benchmarking-a-new-method" title="Link to this heading">¶</a></h2>
 <p>The instructions below will help you to add a new method and run the benchmark afterwards.
 First you should have a local copy of this repository to add and modify files. Open a terminal in a directory of your preference and use</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/jmiramont/benchmarks-detection-denoising
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/USERNAME/REPOSITORY
 </pre></div>
 </div>
+<p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">REPOSITORY</span></code> with your GitHub username and repository name, respectively.</p>
 <section id="installation-using-poetry">
-<h2 id="installation-using-poetry">Installation using <code class="docutils literal notranslate"><span class="pre">poetry</span></code><a class="headerlink" href="#installation-using-poetry" title="Link to this heading">¶</a></h2>
+<h3 id="installation-using-poetry">Installation using <code class="docutils literal notranslate"><span class="pre">poetry</span></code><a class="headerlink" href="#installation-using-poetry" title="Link to this heading">¶</a></h3>
 <p>We use <a class="reference external" href="https://python-poetry.org/docs/"><code class="docutils literal notranslate"><span class="pre">poetry</span></code></a>, a tool for dependency management and packaging in python to install the benchmarking framework. You can install <code class="docutils literal notranslate"><span class="pre">poetry</span></code> following the steps described <a class="reference external" href="https://python-poetry.org/docs/#installation">here</a>.
 Then, make <code class="docutils literal notranslate"><span class="pre">poetry</span></code> create a virtual environment and install the main dependencies of the benchmarks using:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>install<span class="w"> </span>--only<span class="w"> </span>main
 </pre></div>
 </div>
-<p><em>Remark for conda users:</em></p>
-<p><em>If you have <a class="reference external" href="https://www.anaconda.com/"><code class="docutils literal notranslate"><span class="pre">Anaconda</span></code></a> or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html"><code class="docutils literal notranslate"><span class="pre">Miniconda</span></code></a> installed please disable the auto-activation of the base environment and your conda environment using:</em></p>
+<blockquote>
+<div><p>[!NOTE]
+If you have <a class="reference external" href="https://www.anaconda.com/"><code class="docutils literal notranslate"><span class="pre">Anaconda</span></code></a> or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html"><code class="docutils literal notranslate"><span class="pre">Miniconda</span></code></a> installed please disable the auto-activation of the base environment and your conda environment using:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>auto_activate_base<span class="w"> </span><span class="nb">false</span>
 conda<span class="w"> </span>deactivate
 </pre></div>
 </div>
+</div></blockquote>
 <p>Benchmarking Matlab-implemented methods is possible thanks to the incorporated <a class="reference external" href="https://fr.mathworks.com/help/matlab/matlab-engine-for-python.html">Matlab’s Python engine</a>, that allows communication between python and a Matlab’s session. This module’s version must be compatible with your local Matlab installation, please  <a class="reference internal" href="#adding-dependencies"><span class="std std-ref">modify the dependencies for this package accordingly</span></a>.
 Additionally, Matlab’s Python engine is only compatible with certain Python versions, depending on the local Matlab installation you are running. <a class="reference external" href="https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/sysreq/files/python-compatibility.pdf">Check that your versions of matlab and Python are compatible</a>.</p>
 <p>You can now add your new method. You can run the benchmarks with only new added approaches.
@@ -311,11 +329,11 @@ However, if you want to reproduce the current results, <a class="reference inter
 </section>
 </section>
 <section id="adding-a-new-method-to-benchmark">
-<h1 id="adding-a-new-method-to-benchmark">Adding a new method to benchmark<a class="headerlink" href="#adding-a-new-method-to-benchmark" title="Link to this heading">¶</a></h1>
+<h2 id="adding-a-new-method-to-benchmark">Adding a new method to benchmark<a class="headerlink" href="#adding-a-new-method-to-benchmark" title="Link to this heading">¶</a></h2>
 <p>Whether your method is implemented in Python or Matlab, you must create a new <code class="docutils literal notranslate"><span class="pre">.py</span></code> file the name of which must start with <em>method_</em> and have certain content to be automatically discovered by the toolbox. The purpose of this file is to encapsulate your method in a new class. This is much easier than it sounds :). To make it simpler, <a class="reference internal" href="#./new_method_example/method_new_basic_template.py"><span class="xref myst">a file called <em>method_new_basic_template.py</em> is made available</span></a> (for Python users) which you can use as a template. You just have to fill in the parts that implement your method. Matlab users can also find a template <a class="reference internal" href="#./new_method_example/method_new_basic_template_matlab.py"><span class="xref myst">here</span></a>, as well as Octave users <a class="reference internal" href="#./new_method_example/method_new_basic_template_octave.py"><span class="xref myst">here</span></a>
 A new method can then be tested against others by adding this file into the folder <a class="reference internal" href="#./src/methods"><span class="xref myst">src/methods</span></a>. We shall see how to do this using a template file in the following sections.</p>
 <section id="python-based-methods">
-<h2 id="python-based-methods">Python-based methods<a class="headerlink" href="#python-based-methods" title="Link to this heading">¶</a></h2>
+<h3 id="python-based-methods">Python-based methods<a class="headerlink" href="#python-based-methods" title="Link to this heading">¶</a></h3>
 <p>First, the function implementing your method must have the following signature if you’re working in python:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">a_new_method</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="o">...</span>
@@ -355,7 +373,7 @@ A new method can then be tested against others by adding this file into the fold
 <span class="k">class</span> <span class="nc">NewMethod</span><span class="p">(</span><span class="n">MethodTemplate</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">'a_new_method'</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="s1">'denoising'</span>  <span class="c1"># Should be either 'denoising' or 'detection'</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="s1">'denoising'</span>  <span class="c1"># Should be either 'denoising', 'detection' or 'misc'</span>
 
     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span> <span class="c1"># Implement this method.</span>
         <span class="o">...</span>
@@ -368,17 +386,26 @@ A new method can then be tested against others by adding this file into the fold
 <p>The constructor function <code class="docutils literal notranslate"><span class="pre">__init__(self)</span></code> must initialize the attributes <code class="docutils literal notranslate"><span class="pre">self.id</span></code> and <code class="docutils literal notranslate"><span class="pre">self.task</span></code>. The first is a string to identify your method in the benchmark. The second is the name of the task your method is devoted to.</p>
 <p>Lastly, you have to implement the class function <code class="docutils literal notranslate"><span class="pre">method(self,</span> <span class="pre">signals,</span> <span class="pre">*args,</span> <span class="pre">**kwargs)</span></code>. This function may act as a wrapper of your method, i.e. you implement your method elsewhere and call it from this function passing all the parameters in the process, or you could implement it directly here.</p>
 <p>If you want to test your method using different sets of parameters, you can also implement the function <code class="docutils literal notranslate"><span class="pre">get_parameters()</span></code> to return a list with the desired input parameters (you can find an example of this <a class="reference internal" href="#./new_method_example/method_new_with_parameters.py"><span class="xref myst">here</span></a>).</p>
-<p>Finally, <strong>you have to move the file</strong> with all the modifications to the folder <a class="reference internal" href="#./src/methods"><span class="xref myst">/src/methods</span></a>. Changing the name of the file is possible, but keep in mind that <strong>the file’s name must start with “<em>method_</em>” to be recognizable</strong>.</p>
+<p>Finally, <strong>you have to move the file</strong> with all the modifications to the folder <a class="reference internal" href="#./src/methods"><span class="xref myst">/src/methods</span></a>.</p>
+<blockquote>
+<div><p>[!WARNING]
+Changing the name of the file is possible, but keep in mind that <strong>the file’s name must start with “<em>method_</em>” to be recognizable</strong>.</p>
+</div></blockquote>
 </section>
 <section id="matlab-and-octave-based-methods">
-<h2 id="matlab-and-octave-based-methods">Matlab and Octave-based methods<a class="headerlink" href="#matlab-and-octave-based-methods" title="Link to this heading">¶</a></h2>
+<h3 id="matlab-and-octave-based-methods">Matlab and Octave-based methods<a class="headerlink" href="#matlab-and-octave-based-methods" title="Link to this heading">¶</a></h3>
 <p>The Matlab/Octave function implementing your method must have a particular signature. For example, for a method with two input parameters should be:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">function</span><span class="w"> </span>[X]<span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="nf">a_matlab_method</span><span class="p">(</span>signal, param_1, param_2<span class="p">)</span>
 </pre></div>
 </div>
 <p>Your method can have all the (positional) input arguments you need. The output of the function must be a Matlab matrix of <a class="reference internal" href="#size-of-outputs-according-to-the-task"><span class="std std-ref">predefined dimensions according to the task.</span></a></p>
-<p>We now can see how to benchmark a method implemented in Matlab. A template file is given <a class="reference internal" href="#./new_method_example/method_new_basic_template_matlab.py"><span class="xref myst">here</span></a> for interested users.</p>
-<p>In the first section of the file, the class <code class="docutils literal notranslate"><span class="pre">MatlabInterface</span></code> is imported, which will simply act as an interface between Python and a Matlab session where your method will be run:</p>
+<blockquote>
+<div><p>[!NOTE]
+If your method returns more than one parameter, only the first one is taken as the output for the benchmark.</p>
+</div></blockquote>
+<p>We now can see how to benchmark a method implemented in Matlab/Octave.
+Similarly to the case of Python-based methods, a template file is given <a class="reference internal" href="#./new_method_example/method_new_basic_template_matlab.py"><span class="xref myst">here</span></a> for interested users.</p>
+<p>In the first section of this file, the class <code class="docutils literal notranslate"><span class="pre">MatlabInterface</span></code> is imported, which will simply act as an interface between Python and a Matlab session where your method will be run:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="kn">from</span> <span class="nn">mcsm_benchs.benchmark_utils</span> <span class="kn">import</span> <span class="n">MethodTemplate</span>
 <span class="kn">from</span> <span class="nn">mcsm_benchs.MatlabInterface</span> <span class="kn">import</span> <span class="n">MatlabInterface</span>
@@ -420,13 +447,15 @@ A new method can then be tested against others by adding this file into the fold
 
 </pre></div>
 </div>
-<p>The constructor function <code class="docutils literal notranslate"><span class="pre">__init__(self)</span></code> must initialize the attributes <code class="docutils literal notranslate"><span class="pre">self.id</span></code> and <code class="docutils literal notranslate"><span class="pre">self.task</span></code>. The first is a string to identify your method in the benchmark. The second is the name of the task your method is devoted to.</p>
-<p><em>Remark: The <code class="docutils literal notranslate"><span class="pre">MatlabInterface</span></code> class will cast the input parameters in the appropriate Matlab types.</em></p>
-<p><em>Remark 2: A Matlab method must comply with the <a class="reference internal" href="#size-of-outputs-according-to-the-task"><span class="std std-ref">output parameters shapes expected by the toolbox</span></a>. Matlab vectors of double type numbers will be cast into numpy arrays of floats, and Matlab’s boolean types will be cast into python booleans. If your method returns more than one parameter, only the first one returned is taken</em>.</p>
+<!-- The constructor function ```__init__(self)``` must initialize the attributes ```self.id``` and ```self.task```. The first is a string to identify your method in the benchmark. The second is the name of the task your method is devoted to. -->
+<blockquote>
+<div><p>[!NOTE]
+The <code class="docutils literal notranslate"><span class="pre">MatlabInterface</span></code> class provided by <a class="reference external" href="https://github.com/jmiramont/mcsm-benchs"><code class="docutils literal notranslate"><span class="pre">mcsm-benchs</span></code></a> will cast the input parameters in the appropriate Matlab types.</p>
+</div></blockquote>
 </section>
 </section>
 <section id="running-the-benchmark-with-new-methods">
-<h1 id="running-the-benchmark-with-new-methods">Running the benchmark with new methods<a class="headerlink" href="#running-the-benchmark-with-new-methods" title="Link to this heading">¶</a></h1>
+<h2 id="running-the-benchmark-with-new-methods">Running the benchmark with new methods<a class="headerlink" href="#running-the-benchmark-with-new-methods" title="Link to this heading">¶</a></h2>
 <p>Once the new methods are added, you can run a benchmark by executing the files <code class="docutils literal notranslate"><span class="pre">run_this_benchmark.py</span></code> located in the repository.
 You can do this using the local environment created with <code class="docutils literal notranslate"><span class="pre">poetry</span></code> by running:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>run_this_benchmark_denoising.py
@@ -435,9 +464,9 @@ You can do this using the local environment created with <code class="docutils l
 <p>This will run the benchmark using new added methods, avoiding previously explored ones and saving time. You can change this from the configuration files as explained in the next section.</p>
 </section>
 <section id="changing-the-benchmark-configuration">
-<h1 id="changing-the-benchmark-configuration">Changing the benchmark configuration<a class="headerlink" href="#changing-the-benchmark-configuration" title="Link to this heading">¶</a></h1>
-<p>The benchmark parameters can be modified using the  files <a class="reference internal" href="#./config_denoising.yaml"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">config_denoising.yaml</span></code></span></a> and <a class="reference internal" href="#./config_detection.yaml"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">config_detection.yaml</span></code></span></a> located in the repository.
-Each line of this file define an input parameter of the benchmark:</p>
+<h2 id="changing-the-benchmark-configuration">Changing the benchmark configuration<a class="headerlink" href="#changing-the-benchmark-configuration" title="Link to this heading">¶</a></h2>
+<p>The benchmark parameters can be modified using the config file <a class="reference internal" href="#./config.yaml"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">config.yaml</span></code></span></a> located in the repository.
+This file defines the input parameters of the benchmark:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">N</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1024</span><span class="w"> </span><span class="c1"># Number of time samples</span>
 <span class="nt">SNRin</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-20</span><span class="p p-Indicator">,</span><span class="nv">-10</span><span class="p p-Indicator">,</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="nv">20</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># Values of SNR to evaluate.</span>
 <span class="nt">repetitions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"> </span><span class="c1">#</span>
@@ -454,7 +483,7 @@ Each line of this file define an input parameter of the benchmark:</p>
 </div>
 </section>
 <section id="adding-dependencies">
-<h1 id="adding-dependencies">Adding dependencies<a class="headerlink" href="#adding-dependencies" title="Link to this heading">¶</a></h1>
+<h2 id="adding-dependencies">Adding dependencies<a class="headerlink" href="#adding-dependencies" title="Link to this heading">¶</a></h2>
 <p>Your method might need particular modules as dependencies that are not currently listed in the dependencies of the default benchmark. You can add all your dependencies by modifying the <code class="docutils literal notranslate"><span class="pre">.toml</span></code> file in the folder, under the <code class="docutils literal notranslate"><span class="pre">[tool.poetry.dependencies]</span></code> section. For example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>tool.poetry.dependencies<span class="o">]</span>
 <span class="nv">python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"&gt;=3.8,&lt;3.11"</span>
@@ -463,36 +492,29 @@ Each line of this file define an input parameter of the benchmark:</p>
 <span class="nv">pandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"^1.3.5"</span>
 </pre></div>
 </div>
-<p>A more convenient and interactive way to do this interactively is by using <code class="docutils literal notranslate"><span class="pre">poetry</span></code>, for example:</p>
+<p>A more convenient and interactive way to do this interactively is by using <code class="docutils literal notranslate"><span class="pre">poetry</span></code>, for instance:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>add<span class="w"> </span>numpy
 </pre></div>
 </div>
 <p>and following the instructions prompted in the console.</p>
-<p>Afer this, run</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>update
-</pre></div>
-</div>
-<p>to update the .lock file in the folder.</p>
 </section>
-<section id="adding-your-own-method-to-the-online-benchmark">
-<h1 id="adding-your-own-method-to-the-online-benchmark">Adding your own method to the online benchmark<a class="headerlink" href="#adding-your-own-method-to-the-online-benchmark" title="Link to this heading">¶</a></h1>
-<p>For this, <a class="reference external" href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">fork this repository</a>, for example by using the “Fork” button above:</p>
+<section id="contributing-new-methods-to-an-online-benchmark">
+<h2 id="contributing-new-methods-to-an-online-benchmark">Contributing new methods to an online benchmark<a class="headerlink" href="#contributing-new-methods-to-an-online-benchmark" title="Link to this heading">¶</a></h2>
+<p>To add new methods to an online benchmark, you first need to <a class="reference external" href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">fork the collaborative benchmark repository</a>.
+One easy way you can do this is by using the “Fork” button above:</p>
 <p><img alt="Repository header" src="docs/readme_figures/header_repo.png"/></p>
 <p>This will create a copy of the repository in your own GitHub account, the URL of which should look like</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>https://github.com/YOUR-USERNAME/benchmarks-detection-denoising
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>https://github.com/YOUR-USERNAME/FORKED-REPO-NAME
 </pre></div>
 </div>
 <p>Now, let’s create a local copy, i.e. in your computer, of the repository you have just forked. Open a terminal in a directory of your preference and use</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YOUR-USERNAME/benchmarks-detection-denoising
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YOUR-USERNAME/FORKED-REPO-NAME
 </pre></div>
 </div>
-<p>When a repository is forked, a copy of all the branches existing in the original one are also created. It would be better if you create a new branch to work in your own changes, mainly adding your new method to be tested. For this, create a new branch using:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>new_method
-git<span class="w"> </span>checkout<span class="w"> </span>new_method
-</pre></div>
-</div>
-<p>Now you can follow the instructions to <a class="reference internal" href="#adding-a-new-method-to-benchmark"><span class="std std-ref">add your method to the benchmark</span></a>, in this case in a local copy of this repository, in order to be able to add and modify files.</p>
-<p>After this, you can get your approach added to the benchmark via a <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">Pull Request</a>. First, you need to update the remote version of your fork, now that you have added your new method and tested that it is working with <code class="docutils literal notranslate"><span class="pre">pytest</span></code>. To do this, commit the changes and then push them to your remote repository:</p>
+<p>When a repository is forked, a copy of all the branches existing in the original one are also created.</p>
+<p>Now, follow the instructions to <a class="reference internal" href="#adding-a-new-method-to-benchmark"><span class="std std-ref">add your method to a benchmark</span></a>, in this case in a local copy of this repository, in order to be able to add and modify files.</p>
+<p>After this, you can get your method added to the benchmark via a <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">Pull Request</a>.
+For this, you need first to update the remote version of your fork by committing the changes and then pushing them to your remote repository:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>--all<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Uploading a new method"</span>
 git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>new_method
 </pre></div>
@@ -508,7 +530,7 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
 <p>An explanation of the new method and related references (notes, articles, etc.) will be appreciated.</p>
 </section>
 <section id="modify-matlabengine-module-version">
-<h1 id="modify-matlabengine-module-version">Modify <code class="docutils literal notranslate"><span class="pre">matlabengine</span></code> module version<a class="headerlink" href="#modify-matlabengine-module-version" title="Link to this heading">¶</a></h1>
+<h2 id="modify-matlabengine-module-version">Modify <code class="docutils literal notranslate"><span class="pre">matlabengine</span></code> module version<a class="headerlink" href="#modify-matlabengine-module-version" title="Link to this heading">¶</a></h2>
 <p>Check the version of the <code class="docutils literal notranslate"><span class="pre">matlabengine</span></code> module you have to install to use run the benchmarks in the next table:</p>
 <table>
 <thead>
@@ -562,17 +584,19 @@ Once the tests are passed, you can now either create a pull request to run the b
  -->
 </section>
 <section id="size-of-outputs-according-to-the-task">
-<h1 id="size-of-outputs-according-to-the-task">Size of outputs according to the task<a class="headerlink" href="#size-of-outputs-according-to-the-task" title="Link to this heading">¶</a></h1>
+<h2 id="size-of-outputs-according-to-the-task">Size of outputs according to the task<a class="headerlink" href="#size-of-outputs-according-to-the-task" title="Link to this heading">¶</a></h2>
 <p>The shape and type of the output depends on the task.</p>
 <ul class="simple">
-<li><p>For Signal Denoising: The output must be a vector array with the same length as the signal.</p></li>
-<li><p>For Signal Detection: The output of the method must be a boolean variable indicating if a signal has been detected (true) or not (false).</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">=</span> <span class="pre">denoising</span></code>: The output must be a vector array with the same length as the signal.</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">=</span> <span class="pre">detection</span></code>: The output of the method must be a boolean variable indicating if a signal has been detected (true) or not (false).</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">=</span> <span class="pre">misc</span></code>: The output of the method has not size limitation, but a performance function capable of taking the output must be passed as an input parameter to the benchmark.</p></li>
 </ul>
 </section>
 <section id="reproducing-current-benchmarks">
-<h1 id="reproducing-current-benchmarks">Reproducing current benchmarks<a class="headerlink" href="#reproducing-current-benchmarks" title="Link to this heading">¶</a></h1>
+<h2 id="reproducing-current-benchmarks">Reproducing current benchmarks<a class="headerlink" href="#reproducing-current-benchmarks" title="Link to this heading">¶</a></h2>
 <section id="re-run-benchmarks">
-<h2 id="re-run-benchmarks">Re-run benchmarks<a class="headerlink" href="#re-run-benchmarks" title="Link to this heading">¶</a></h2>
+<h3 id="re-run-benchmarks">Re-run benchmarks<a class="headerlink" href="#re-run-benchmarks" title="Link to this heading">¶</a></h3>
+</section>
 </section>
 </section>
 <div class="toctree-wrapper compound">
