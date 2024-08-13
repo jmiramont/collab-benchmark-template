@@ -50,15 +50,15 @@ poetry install --only main
 >conda deactivate
 >```
 
-Benchmarking Matlab-implemented methods is possible thanks to the incorporated [Matlab's Python engine](https://fr.mathworks.com/help/matlab/matlab-engine-for-python.html), that allows communication between python and a Matlab's session. This module's version must be compatible with your local Matlab installation, please  [modify the dependencies for this package accordingly](#adding-dependencies).
-Additionally, Matlab's Python engine is only compatible with certain Python versions, depending on the local Matlab installation you are running. [Check that your versions of matlab and Python are compatible](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/sysreq/files/python-compatibility.pdf).
+Benchmarking MATLAB-implemented methods is possible thanks to the incorporated [Matlab's Python engine](https://fr.mathworks.com/help/matlab/matlab-engine-for-python.html), that allows communication between `Python` and a `MATLAB`/`Octave` session. This module's version must be compatible with your local `MATLAB` installation, please [modify the dependencies for this package accordingly](#adding-dependencies).
+Additionally, `matlabengine` is only compatible with certain `Python` versions, depending on the local `MATLAB` installation you are running. [Check that your versions of matlab and Python are compatible](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/sysreq/files/python-compatibility.pdf).
 
 You can now add your new method. You can run the benchmarks with only new added approaches.
 However, if you want to reproduce the current results, [you will need extra dependencies](#reproducing-current-benchmarks).
 
 ## Adding a new method to benchmark
 
-Whether your method is implemented in Python or Matlab, you must create a new ```.py``` file the name of which must start with *method_* and have certain content to be automatically discovered by the toolbox. The purpose of this file is to encapsulate your method in a new class. This is much easier than it sounds :). To make it simpler, [a file called *method_new_basic_template.py* is made available](./new_method_example/method_new_basic_template.py) (for Python users) which you can use as a template. You just have to fill in the parts that implement your method. Matlab users can also find a template [here](./new_method_example/method_new_basic_template_matlab.py), as well as Octave users [here](./new_method_example/method_new_basic_template_octave.py)
+Whether your method is implemented in Python or Matlab, you must create a new ```.py``` file the name of which must start with *method_* and have certain content to be automatically discovered by the toolbox. The purpose of this file is to encapsulate your method in a new class. This is much easier than it sounds :). To make it simpler, [a file called *method_new_basic_template.py* is made available](./new_method_example/method_new_basic_template.py) (for Python users) which you can use as a template. You just have to fill in the parts that implement your method. Matlab users can also find a template [here](./new_method_example/method_new_basic_template_matlab.py), as well as `Octave` users [here](./new_method_example/method_new_basic_template_octave.py)
 A new method can then be tested against others by adding this file into the folder [src/methods](./src/methods). We shall see how to do this using a template file in the following sections.
 
 ### Python-based methods
@@ -133,9 +133,9 @@ Finally, **you have to move the file** with all the modifications to the folder 
 >[!WARNING]
 >Changing the name of the file is possible, but keep in mind that **the file's name must start with "*method_*" to be recognizable**.
 
-### Matlab and Octave-based methods
+### `MATLAB` and `Octave`-based methods
 
-The Matlab/Octave function implementing your method must have a particular signature. For example, for a method with two input parameters should be:
+The `MATLAB`/`Octave` function implementing your method must have a particular signature. For example, for a method with two input parameters should be:
 
 ```matlab
     function [X]  = a_matlab_method(signal, param_1, param_2)
@@ -146,10 +146,10 @@ Your method can have all the (positional) input arguments you need. The output o
 >[!NOTE]
 > If your method returns more than one parameter, only the first one is taken as the output for the benchmark.
 
-We now can see how to benchmark a method implemented in Matlab/Octave. 
+We now can see how to benchmark a method implemented in `MATLAB`/`Octave`. 
 Similarly to the case of Python-based methods, a template file is given [here](./new_method_example/method_new_basic_template_matlab.py) for interested users.
 
-In the first section of this file, the class ```MatlabInterface``` is imported, which will simply act as an interface between Python and a Matlab session where your method will be run:
+In the first section of this file, the class ```MatlabInterface``` is imported, which will simply act as an interface between `Python` and a `MATLAB` session where your method will be run:
 
 ```python
 
@@ -173,7 +173,7 @@ paths = [
         ]
 ```
 
-The last lines make sure that if you created a new folder named ```new_method_utils``` inside ```src\methods``` with the files related to your Matlab-implemented approach, these are available to the Matlab session.
+The last lines make sure that if you created a new folder named ```new_method_utils``` inside ```src\methods``` with the files related to your Matlab-implemented approach, these are available to the `MATLAB` session.
 
 Now we are ready to complete the third section of the file. This can be used exactly as it is in the template file, provided you have done all the precedent steps.
 
@@ -201,7 +201,7 @@ class NewMethod(MethodTemplate):
 <!-- The constructor function ```__init__(self)``` must initialize the attributes ```self.id``` and ```self.task```. The first is a string to identify your method in the benchmark. The second is the name of the task your method is devoted to. -->
 
 >[!NOTE]
->The ```MatlabInterface``` class provided by [```mcsm-benchs```](https://github.com/jmiramont/mcsm-benchs) will cast the input parameters in the appropriate Matlab types.
+>The ```MatlabInterface``` class provided by [```mcsm-benchs```](https://github.com/jmiramont/mcsm-benchs) will cast the input parameters in the appropriate `MATLAB` types.
 
 ## Running the benchmark with new methods
 
