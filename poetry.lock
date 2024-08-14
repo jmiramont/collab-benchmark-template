@@ -1154,12 +1154,13 @@ pytest-cov = "^5.0.0"
 scipy = "^1.7.3"
 seaborn = ">=0.12.0"
 tabulate = "^0.8.9"
+tqdm = "^4.66.4"
 
 [package.source]
 type = "git"
 url = "https://github.com/jmiramont/mcsm-benchs.git"
 reference = "dev"
-resolved_reference = "9f2908bc425e22e8552fa88e79d83cbf9fecda96"
+resolved_reference = "6632b1174dd59df6fff1d4ac9217b1189d6fc995"
 
 [[package]]
 name = "mdit-py-plugins"

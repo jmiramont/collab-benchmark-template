@@ -9,7 +9,7 @@ Remark: Make sure that this file starts with "method_".
 | Remark: Make sure that neither of those modules starts with "method_".
 """
 from mcsm_benchs.benchmark_utils import MethodTemplate
-from mcsm_benchs.MatlabInterface import MatlabInterface
+from mcsm_benchs.OctaveInterface import OctaveInterface
 
 
 """ Second section ---------------------------------------------------------------------
@@ -18,7 +18,7 @@ from mcsm_benchs.MatlabInterface import MatlabInterface
 | passing the name of the function file (without the .m 
 | extension). Then get the matlab function as:
 """
-mlint = MatlabInterface('my_matlab_method') 
+mlint = OctaveInterface('my_matlab_method') 
 matlab_function = mlint.matlab_function # A python function handler to the method.
 
 

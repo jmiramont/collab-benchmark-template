@@ -5,20 +5,22 @@ You can use this template to create a public, collaborative benchmarks of multi-
 ## Quickstart
 
 1. Use this template to [create a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+
 >[!NOTE]
 > Make sure you include all the branches of the template by checking the *"Include all branches"* option.
+
 2. Create a local version of your new collaborative benchmark by [cloning the new repository](#benchmarking-a-new-method).
-2. [Create](#installation-using-poetry) a new python virtual environment and install the main dependencies using [```poetry```](https://python-poetry.org/docs/):
+3. [Launch](#installation-using-poetry) a new python virtual environment and install the main dependencies using [```poetry```](https://python-poetry.org/docs/):
 
     ```bash
     poetry install --only main
     ```
 
-3. [Add your methods](#adding-a-new-method-to-benchmark) by moving files that represent them in ```/src/methods``` folder and [adding new dependencies](#adding-dependencies).
-4. [Configure](#changing-the-benchmark-configuration) your benchmark by changing [```config.yaml```](config.yaml).
-5. [Run](#running-the-benchmark-with-new-methods) the script ```run_this_benchmark.py```.
-6. Push your changes to your repository and wait for the results to get published.
-7. Share interactive results to others
+4. [Add your methods](#adding-a-new-method-to-benchmark) by moving files that represent them in ```/src/methods``` folder and [adding new dependencies](#adding-dependencies).
+5. [Configure](#changing-the-benchmark-configuration) your benchmark by changing [```config.yaml```](config.yaml).
+6. [Run](#running-the-benchmark-with-new-methods) the script ```run_this_benchmark.py```.
+7. Push your changes to your repository and wait for the results to get published.
+8. [Share](#sharing-results) interactive results to others
 
 >[!TIP]
 >:bulb: Collaborators can add new methods to your benchmark [via a pull-request](#contributing-new-methods-to-an-online-benchmark).
@@ -45,6 +47,7 @@ poetry install --only main
 
 >[!NOTE]
 >If you have [`Anaconda`](https://www.anaconda.com/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) installed please disable the auto-activation of the base environment and your conda environment using:
+>
 >```bash
 >conda config --set auto_activate_base false
 >conda deactivate
@@ -58,7 +61,9 @@ However, if you want to reproduce the current results, [you will need extra depe
 
 ## Adding a new method to benchmark
 
-Whether your method is implemented in Python or Matlab, you must create a new ```.py``` file the name of which must start with *method_* and have certain content to be automatically discovered by the toolbox. The purpose of this file is to encapsulate your method in a new class. This is much easier than it sounds :). To make it simpler, [a file called *method_new_basic_template.py* is made available](./new_method_example/method_new_basic_template.py) (for Python users) which you can use as a template. You just have to fill in the parts that implement your method. Matlab users can also find a template [here](./new_method_example/method_new_basic_template_matlab.py), as well as Octave users [here](./new_method_example/method_new_basic_template_octave.py)
+Whether your method is implemented in Python or Matlab, you must create a new ```.py``` file the name of which must start with *method_* and have certain content to be automatically discovered by the toolbox. The purpose of this file is to encapsulate your method in a new class. This is much easier than it sounds!.
+
+To make it simpler, [a file called *method_new_basic_template.py* is made available](./new_method_example/method_new_basic_template.py) (for Python users) which you can use as a template. You just have to fill in the parts that implement your method. Matlab users can also find a template [here](./new_method_example/method_new_basic_template_matlab.py), as well as Octave users [here](./new_method_example/method_new_basic_template_octave.py)
 A new method can then be tested against others by adding this file into the folder [src/methods](./src/methods). We shall see how to do this using a template file in the following sections.
 
 ### Python-based methods
@@ -128,7 +133,7 @@ Lastly, you have to implement the class function ```method(self, signals, *args,
 
 If you want to test your method using different sets of parameters, you can also implement the function `get_parameters()` to return a list with the desired input parameters (you can find an example of this [here](./new_method_example/method_new_with_parameters.py)).
 
-Finally, **you have to move the file** with all the modifications to the folder [/src/methods](./src/methods). 
+Finally, **you have to move the file** with all the modifications to the folder [/src/methods](./src/methods).
 
 >[!WARNING]
 >Changing the name of the file is possible, but keep in mind that **the file's name must start with "*method_*" to be recognizable**.
@@ -146,10 +151,11 @@ Your method can have all the (positional) input arguments you need. The output o
 >[!NOTE]
 > If your method returns more than one parameter, only the first one is taken as the output for the benchmark.
 
-We now can see how to benchmark a method implemented in Matlab/Octave. 
+We now can see how to benchmark a method implemented in Matlab/Octave.
 Similarly to the case of Python-based methods, a template file is given [here](./new_method_example/method_new_basic_template_matlab.py) for interested users.
 
 In the first section of this file, the class ```MatlabInterface``` is imported, which will simply act as an interface between Python and a Matlab session where your method will be run:
+Octave users can follow the same instructions below, but importing ```OctaveInterface``` instead, based on [`oct2py`](https://pypi.org/project/oct2py/).
 
 ```python
 
@@ -257,7 +263,7 @@ and following the instructions prompted in the console.
 
 ## Contributing new methods to an online benchmark
 
-To add new methods to an online benchmark, you first need to [fork the collaborative benchmark repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo). 
+To add new methods to an online benchmark, you first need to [fork the collaborative benchmark repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 One easy way you can do this is by using the "Fork" button above:
 
 ![Repository header](docs/readme_figures/header_repo.png)
@@ -322,7 +328,7 @@ matlabengine = "9.12.17"
 
 Make sure to change the version with the one corresponding to your Python and Matlab current versions. If you have an older version of Matlab or Python, you can search for the correct version of the ```matlabengine``` module [here](https://pypi.org/project/matlabengine/#history).
 
-Afer this, run
+After this, run
 
 ```bash
 poetry update
@@ -344,6 +350,10 @@ This will check a series of important points for running the benchmark online, m
 Once the tests are passed, you can now either create a pull request to run the benchmark remotely, or [run the benchmark locally](#running-this-benchmark-locally).
  -->
 
+## Sharing results
+
+## Reproducing current benchmarks
+
 ## Size of outputs according to the task
 
 The shape and type of the output depends on the task.
@@ -351,8 +361,3 @@ The shape and type of the output depends on the task.
 - For `task = denoising`: The output must be a vector array with the same length as the signal.
 - For `task = detection`: The output of the method must be a boolean variable indicating if a signal has been detected (true) or not (false).
 - For `task = misc`: The output of the method has not size limitation, but a performance function capable of taking the output must be passed as an input parameter to the benchmark.
-
-## Reproducing current benchmarks
-
-### Re-run benchmarks
-
