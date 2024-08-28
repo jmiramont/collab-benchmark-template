@@ -1,3 +1,5 @@
+# This workflow runs the script publish_results.py.
+ 
 name: Publish docs and results
 
 on:

@@ -1,3 +1,11 @@
+""" This script runs a benchmark with the parameters specified in the config.yaml file.
+
+First, all methods are discovered in the "src/methods" folder.
+Then a benchmark is initialized and run.
+Results are saved in a serialized file with pickle (to be modified in later versions.)
+
+Author: Juan Manuel Miramont
+"""
 if __name__ == "__main__":
     import importlib
     from src.methods import *

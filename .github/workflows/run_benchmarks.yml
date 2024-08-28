@@ -1,4 +1,4 @@
-# This workflow will publish the benchmark results.
+# This workflow run the script "run_this_benchmark.py"
 name: Run benchmarks
 
 on: workflow_dispatch

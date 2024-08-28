@@ -151,7 +151,7 @@ Your method can have all the (positional) input arguments you need. The output o
 >[!NOTE]
 > If your method returns more than one parameter, only the first one is taken as the output for the benchmark.
 
-We now can see how to benchmark a method implemented in `MATLAB`/`Octave`. 
+We now can see how to benchmark a method implemented in `MATLAB`/`Octave`.
 Similarly to the case of Python-based methods, a template file is given [here](./new_method_example/method_new_basic_template_matlab.py) for interested users.
 
 In the first section of this file, the class ```MatlabInterface``` is imported, which will simply act as an interface between `Python` and a `MATLAB` session where your method will be run:
