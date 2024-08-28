@@ -80,7 +80,8 @@ if __name__ == "__main__":
         interpreter.get_csv_files(path=os.path.join('results',sub_folder),)
 
         # Append row under header
-        table_string = '| Benchmark {}'.format(sub_folder)+' | [Link]('+link+'/results_{}.html) | \n'.format(sub_folder)
+        link2 = 'https://{}.github.io/{}/results'.format(username,reponame)
+        table_string = '| Benchmark {}'.format(sub_folder)+' | [Link]('+link2+'/results_{}.html) | \n'.format(sub_folder)
         with open(output_path, 'a') as f:
             f.write(table_string)
 
