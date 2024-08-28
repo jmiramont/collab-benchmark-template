@@ -29,7 +29,7 @@ if __name__ == "__main__":
     sub_folders = ['b{}'.format(i+1) for i,p in enumerate(paths)]
 
     # Write a .md table to summarize the results:
-    output_path = os.path.join('results','results_summary.md')
+    output_path = os.path.join('results','index.md')
     
     # Generate table header:
     lines = ['# Results', '| Benchmark | Link |','| --------- | ---- | \n']
@@ -80,8 +80,8 @@ if __name__ == "__main__":
         interpreter.get_csv_files(path=os.path.join('results',sub_folder),)
 
         # Append row under header
-        link2 = 'https://{}.github.io/{}/results'.format(username,reponame)
-        table_string = '| Benchmark {}'.format(sub_folder)+' | [Link]('+link2+'/results_{}.html) | \n'.format(sub_folder)
+        link2 = 'https://{}.github.io/{}/'.format(username,reponame)
+        table_string = '| Benchmark {}'.format(sub_folder)+' | [Link]('+link2+'results_{}.html) | \n'.format(sub_folder)
         with open(output_path, 'a') as f:
             f.write(table_string)
 
