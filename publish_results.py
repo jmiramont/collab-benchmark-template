@@ -32,7 +32,8 @@ if __name__ == "__main__":
     output_path = os.path.join('results','index.md')
     
     # Generate table header:
-    lines = ['# Results', '| Benchmark | Link |','| --------- | ---- | \n']
+    lines = ['# Results',   '| Benchmark | Description | Link | ',
+                            '| --------- | ----------- | ---- | \n']
     with open(output_path, 'w') as f:
         f.write('\n'.join(lines))
 
@@ -81,7 +82,19 @@ if __name__ == "__main__":
 
         # Append row under header
         link2 = 'https://{}.github.io/{}/'.format(username,reponame)
-        table_string = '| Benchmark {}'.format(sub_folder)+' | [Link]('+link2+'results_{}.html) | \n'.format(sub_folder)
+
+        if benchmark.name is None:
+            table_string = '| Benchmark: {}'.format(sub_folder)
+        else:
+            table_string = '| {}'.format(benchmark.name) 
+
+        if benchmark.description is None:
+            table_string = table_string + '| '
+        else:
+            table_string = table_string + '| '+ benchmark.description
+
+        table_string = table_string + ' | [Link]('+link2+'results_{}.html) | \n'.format(sub_folder)
+
         with open(output_path, 'a') as f:
             f.write(table_string)
 
