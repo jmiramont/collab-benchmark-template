@@ -350,6 +350,19 @@ Once the tests are passed, you can now either create a pull request to run the b
  -->
 
 ## Sharing results
+Once the results of your benchmarks are saved in the `./results` folder, you can use the workflows for automatic deployment, that come with this template, for publishing a summary, interactive plots and `.csv` files with all the data.
+
+If the repository was public from the beggining, this should be automatic, and a website hosted in the branch `gh-page` is created showing a table.
+The typical url address is `https://USERNAME.github.io/REPO-NAME/`.
+The first column will list all the benchmarks using the description used when run (if passed as parameter). The second column shows a link that points to the online report of the correspondent benchmark.
+
+### Activate GitHub sites
+If the previous was not done automatically, you will need to manually activate the GitHub website for your repository.
+For this, go the configuration  of your repository, select **Pages** on the left menu.
+There, make sure that option **Source** is *Deploy from a branch* and the option **Branch** is *gh-pages* (from *\root*). Then hit save.
+This will make sure the website is hosted and correctely deployed.
+
+
 
 ## Reproducing current benchmarks
 
