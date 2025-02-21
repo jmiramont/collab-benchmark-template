@@ -354,7 +354,7 @@ Once the results of your benchmarks are saved in the `./results` folder, you can
 
 If the repository was public from the beggining, this should be automatic, and a website hosted in the branch `gh-page` is created showing a table.
 The typical url address is `https://USERNAME.github.io/REPO-NAME/`.
-The first column will list all the benchmarks using the description used when run (if passed as parameter). The second column shows a link that points to the online report of the correspondent benchmark.
+The first column will list all the benchmarks using the description used when run (if passed as parameter). The second column shows a link that points to the online report of the corresponding benchmark.
 
 ### Activate GitHub sites
 If the previous was not done automatically, you will need to manually activate the GitHub website for your repository.
