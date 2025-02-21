@@ -363,9 +363,6 @@ There, make sure that option **Source** is *Deploy from a branch* and the option
 This will make sure the website is hosted and correctely deployed.
 
 
-
-## Reproducing current benchmarks
-
 ## Size of outputs according to the task
 
 The shape and type of the output depends on the task.
