@@ -1,6 +1,6 @@
 # A template for a collaborative benchmark repository
 
-You can use this template to create a public, collaborative benchmarks of multi-component signal processing methods based on the benchmarking toolbox [```mcsm-benchs```](https://github.com/jmiramont/mcsm-benchs).
+You can use this template to create public, collaborative benchmarks of multi-component signal processing methods based on the benchmarking toolbox [```mcsm-benchs```](https://github.com/jmiramont/mcsm-benchs).
 
 ## Quickstart
 
